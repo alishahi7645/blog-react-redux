@@ -2,6 +2,9 @@ import Navbar from "./components/navbar/Navbar";
 import {BrowserRouter , Routes , Route} from 'react-router-dom';
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 function App() {
   return (
     <BrowserRouter>
