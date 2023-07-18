@@ -3,6 +3,7 @@ import {BrowserRouter , Routes , Route} from 'react-router-dom';
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import axios from 'axios';
+import Create from "./components/blog/Create";
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = ['applicaition/json'];
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/create" element={<Create/>}/>
       </Routes>
     </BrowserRouter>
   );
