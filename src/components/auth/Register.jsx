@@ -19,12 +19,7 @@ function Register() {
     };
 
     await axios
-      .post("http://localhost:8000/api/register", data, {
-        headers: {
-          "Content-Type": "applicaition/json",
-          Accept: "applicaition/json",
-        },
-      })
+      .post("/api/register", data)
       .then(res => {
         if (res.data.status === 200) {
             Swal.fire({

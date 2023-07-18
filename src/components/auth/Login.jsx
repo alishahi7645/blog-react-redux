@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./auth.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,17 +13,33 @@ function Login() {
       password,
     };
     await axios
-      .get("http://localhost:8000/sanctum/csrf-cookie")
+      .get("/sanctum/csrf-cookie")
       .then(response => {
         axios
-          .post("http://localhost:8000/api/login", data, {
-            headers: {
-              "Content-Type": "applicaition/json",
-              Accept: "applicaition/json",
-            },
-          })
+          .post("/api/login", data)
           .then((res) => {
-            console.log(res);
+            localStorage.setItem('auth-token', res.data.token);
+            localStorage.setItem('user_name', res.data.username);
+            localStorage.setItem('user_id', res.data.user_id);
+            if(res.data.status === 200){
+                Swal.fire({
+                    icon: "success",
+                    title: 'ورود موفق',
+                    text:res.data.message,
+                    showCancelButton:true,
+                    confirmButtonText: 'تایید!',
+                    timer: 8000
+                })
+            }else if(res.data.status === 401){
+                Swal.fire({
+                    icon: "warning",
+                    title: 'مشکلی پیش آمده',
+                    text:res.data.message,
+                    showCancelButton:true,
+                    confirmButtonText: 'تایید!',
+                    timer: 8000
+                })
+            }
           })
           .catch((err) => {
             console.log(err);

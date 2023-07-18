@@ -4,6 +4,9 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import axios from 'axios';
 
+axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.headers.post['Content-Type'] = ['applicaition/json'];
+axios.defaults.headers.post['Accept'] = ['applicaition/json'];
 axios.defaults.withCredentials = true;
 function App() {
   return (
