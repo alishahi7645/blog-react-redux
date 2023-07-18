@@ -3,12 +3,13 @@ import "./auth.css";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState([]);
-  console.log(error);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,21 +21,22 @@ function Register() {
 
     await axios
       .post("/api/register", data)
-      .then(res => {
+      .then((res) => {
         if (res.data.status === 200) {
-            Swal.fire({
-                icon: "success",
-                title: 'تبریک میگم!',
-                text:res.data.message,
-                showCancelButton:true,
-                confirmButtonText: 'تایید!',
-                timer: 8000
-            })
+          Swal.fire({
+            icon: "success",
+            title: "تبریک میگم!",
+            text: res.data.message,
+            showCancelButton: true,
+            confirmButtonText: "تایید!",
+            timer: 8000,
+          });
+          navigate('/login')
         } else {
           setError(res.data.validation_errors);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -57,9 +59,9 @@ function Register() {
                   onChange={(e) => setName(e.target.value)}
                   name="name"
                 />
-                {error && 
+                {error && (
                   <small className="text-danger mt-3">{error.name}</small>
-                }
+                )}
               </div>
               <div className="form-group mt-3">
                 <label htmlFor="" className="text-white mb-2">
@@ -71,9 +73,9 @@ function Register() {
                   onChange={(e) => setEmail(e.target.value)}
                   name="email"
                 />
-                {error && 
+                {error && (
                   <small className="text-danger mt-3">{error.email}</small>
-                }
+                )}
               </div>
               <div className="form-group mt-3">
                 <label htmlFor="" className="text-white mb-2">
@@ -85,9 +87,9 @@ function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                   name="password"
                 />
-                {error && 
+                {error && (
                   <small className="text-danger mt-3">{error.password}</small>
-                }
+                )}
               </div>
               <div className="form-group mt-4">
                 <button type="submit" className="btn btn-success w-100">
