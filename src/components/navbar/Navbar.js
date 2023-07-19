@@ -22,7 +22,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/blog">
+                  <NavLink className="nav-link" to="/create">
                     ارسال بلاگ
                   </NavLink>
                 </li>
