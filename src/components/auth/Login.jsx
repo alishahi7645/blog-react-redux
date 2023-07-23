@@ -18,9 +18,6 @@ function Login() {
       axios
         .post("/api/login", data)
         .then((res) => {
-          localStorage.setItem("auth-token", res.data.token);
-          localStorage.setItem("user_name", res.data.username);
-          localStorage.setItem("user_id", res.data.user_id);
           if (res.data.status === 200) {
             Swal.fire({
               icon: "success",
@@ -30,7 +27,7 @@ function Login() {
               confirmButtonText: "تایید!",
               timer: 8000,
             });
-            navigate('/')
+            navigate("/");
           } else if (res.data.status === 401) {
             Swal.fire({
               icon: "warning",
@@ -41,6 +38,9 @@ function Login() {
               timer: 8000,
             });
           }
+          localStorage.setItem("auth-token", res.data.token);
+          localStorage.setItem("user_name", res.data.username);
+          localStorage.setItem("user_id", res.data.user_id);
         })
         .catch((err) => {
           console.log(err);
