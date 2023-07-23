@@ -4,7 +4,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import axios from 'axios';
 import Create from "./components/blog/Create";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = ['applicaition/json'];
